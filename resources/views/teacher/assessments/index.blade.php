@@ -4,27 +4,27 @@
 @section('header_title', 'Student Assessments')
 
 @section('content')
-<div class="grid grid-cols-1 gap-6 lg:grid-cols-3 animate-fade-in">
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3 animate-fade-in text-zinc-900 dark:text-zinc-100">
     <!-- Left Column: Add Marks Form -->
     <div class="lg:col-span-1 space-y-6">
         <div>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Record Assessment</h2>
-            <p class="text-xs text-slate-400 mt-0.5">Submit new assessment marks for students.</p>
+            <h2 class="text-lg font-bold text-zinc-900 dark:text-white">Record Assessment</h2>
+            <p class="text-xs text-zinc-450 dark:text-zinc-500 mt-0.5">Submit new assessment marks for students.</p>
         </div>
 
-        <div class="bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 shadow-sm">
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm">
             <form method="POST" action="{{ route('teacher.assessments.store') }}" class="space-y-5">
                 @csrf
 
                 <!-- Student Selection -->
                 <div>
-                    <label for="student_id" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    <label for="student_id" class="block text-xxs font-black uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                         Select Student
                     </label>
                     <select id="student_id" 
                             name="student_id" 
                             required 
-                            class="block mt-1.5 w-full rounded-xl border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xxs focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5 px-4">
+                            class="block mt-1.5 w-full rounded-xl border-zinc-250 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-xxs focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-sm py-2.5 px-4 outline-none transition-all duration-150">
                         <option value="">-- Select Student --</option>
                         @foreach($students as $st)
                             <option value="{{ $st->id }}">{{ $st->name }}</option>
@@ -34,13 +34,13 @@
 
                 <!-- Subject Selection -->
                 <div>
-                    <label for="subject_id" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    <label for="subject_id" class="block text-xxs font-black uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                         Subject Area
                     </label>
                     <select id="subject_id" 
                             name="subject_id" 
                             required 
-                            class="block mt-1.5 w-full rounded-xl border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xxs focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5 px-4">
+                            class="block mt-1.5 w-full rounded-xl border-zinc-250 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-xxs focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-sm py-2.5 px-4 outline-none transition-all duration-150">
                         <option value="">-- Select Subject --</option>
                         @foreach($subjects as $subj)
                             <option value="{{ $subj->id }}">{{ $subj->code }} - {{ $subj->name }}</option>
@@ -51,22 +51,22 @@
                 <!-- Component Selector & Score Fields -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="component" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            Assessment Component
+                        <label for="component" class="block text-xxs font-black uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
+                            Component
                         </label>
                         <select id="component" 
                                 name="component" 
                                 required 
                                 onchange="updateScoreLimits()"
-                                class="block mt-1.5 w-full rounded-xl border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xxs focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5 px-4">
+                                class="block mt-1.5 w-full rounded-xl border-zinc-250 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-xxs focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-sm py-2.5 px-4 outline-none transition-all duration-150">
                             <option value="ca1" {{ old('component') === 'ca1' ? 'selected' : '' }}>CA1 (out of 30)</option>
                             <option value="ca2" {{ old('component') === 'ca2' ? 'selected' : '' }}>CA2 (out of 30)</option>
-                            <option value="end_term" {{ old('component') === 'end_term' ? 'selected' : '' }}>End Term Exam (out of 40)</option>
+                            <option value="end_term" {{ old('component') === 'end_term' ? 'selected' : '' }}>End Term (out of 40)</option>
                         </select>
                     </div>
 
                     <div>
-                        <label for="score" id="score_label" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        <label for="score" id="score_label" class="block text-xxs font-black uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                             Obtained Score
                         </label>
                         <input id="score" 
@@ -77,7 +77,7 @@
                                required 
                                min="0" 
                                max="30" 
-                               class="block mt-1.5 w-full rounded-xl border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xxs focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5 px-4"
+                               class="block mt-1.5 w-full rounded-xl border-zinc-250 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-xxs focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-sm py-2.5 px-4 outline-none transition-all duration-150"
                                placeholder="e.g. 24.5" />
                     </div>
                 </div>
@@ -104,19 +104,19 @@
 
                 <!-- Remedial Resource attached by Teacher -->
                 <div>
-                    <label for="remedial_resource" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    <label for="remedial_resource" class="block text-xxs font-black uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                         Remedial Resource / Study Instructions
                     </label>
                     <textarea id="remedial_resource" 
                               name="remedial_resource" 
-                              rows="2"
-                              class="block mt-1.5 w-full rounded-xl border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xxs focus:border-indigo-500 focus:ring-indigo-500 text-sm py-2.5 px-4"
+                              rows="3"
+                              class="block mt-1.5 w-full rounded-xl border-zinc-250 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-xxs focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-xs p-4 outline-none transition-all duration-150 leading-relaxed"
                               placeholder="e.g. Focus on electric circuit diagrams and complete basic formulas worksheet."></textarea>
                 </div>
 
                 <!-- Submit -->
-                <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <button type="submit" class="flex w-full justify-center rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all duration-150">
+                <div class="pt-2 border-t border-zinc-200 dark:border-zinc-800">
+                    <button type="submit" class="flex w-full justify-center rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 px-4 py-2.5 text-sm font-semibold shadow-sm transition-all duration-150">
                         Save Marks
                     </button>
                 </div>
@@ -127,15 +127,15 @@
     <!-- Right Column: List of Marks -->
     <div class="lg:col-span-2 space-y-6">
         <div>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Assessments Log</h2>
-            <p class="text-xs text-slate-400 mt-0.5">Logs of recently updated subject assessment marks.</p>
+            <h2 class="text-lg font-bold text-zinc-900 dark:text-white">Assessments Log</h2>
+            <p class="text-xs text-zinc-450 dark:text-zinc-500 mt-0.5">Logs of recently updated subject assessment marks.</p>
         </div>
 
-        <div class="bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 text-xxs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                        <tr class="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-xxs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                             <th class="py-4 px-6">Student</th>
                             <th class="py-4 px-6">Subject</th>
                             <th class="py-4 px-4 text-center">CA1 (30)</th>
@@ -145,38 +145,38 @@
                             <th class="py-4 px-6 text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+                    <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800 text-sm">
                         @forelse($assessments as $ast)
-                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-900/10 transition-colors">
-                                <td class="py-4 px-6 font-semibold text-slate-900 dark:text-white">
+                            <tr class="hover:bg-zinc-50/50 dark:hover:bg-zinc-850/20 transition-colors">
+                                <td class="py-4 px-6 font-semibold text-zinc-900 dark:text-white">
                                     {{ $ast->student->name ?? 'N/A' }}
                                 </td>
                                 <td class="py-4 px-6 font-semibold">
-                                    <span class="block text-slate-900 dark:text-white">{{ $ast->subjectRelation->code ?? 'N/A' }}</span>
-                                    <span class="block text-xxs text-slate-400 dark:text-slate-500 font-medium mt-0.5">{{ $ast->subjectRelation->name ?? $ast->subject }}</span>
+                                    <span class="block text-zinc-900 dark:text-white">{{ $ast->subjectRelation->code ?? 'N/A' }}</span>
+                                    <span class="block text-xxs text-zinc-400 dark:text-zinc-500 font-medium mt-0.5">{{ $ast->subjectRelation->name ?? $ast->subject }}</span>
                                 </td>
-                                <td class="py-4 px-4 text-center font-medium text-slate-650 dark:text-slate-350">
+                                <td class="py-4 px-4 text-center font-medium text-zinc-550 dark:text-zinc-400">
                                     {{ is_null($ast->ca1) ? '—' : $ast->ca1 }}
                                 </td>
-                                <td class="py-4 px-4 text-center font-medium text-slate-650 dark:text-slate-350">
+                                <td class="py-4 px-4 text-center font-medium text-zinc-550 dark:text-zinc-400">
                                     {{ is_null($ast->ca2) ? '—' : $ast->ca2 }}
                                 </td>
-                                <td class="py-4 px-4 text-center font-medium text-slate-650 dark:text-slate-350">
+                                <td class="py-4 px-4 text-center font-medium text-zinc-550 dark:text-zinc-400">
                                     {{ is_null($ast->end_term) ? '—' : $ast->end_term }}
                                 </td>
                                 <td class="py-4 px-6 text-center font-bold">
-                                    <span class="{{ $ast->percentage < 40 ? 'text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/20 px-2 py-0.5 rounded-lg border border-rose-100 dark:border-rose-900/30' : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 px-2 py-0.5 rounded-lg border border-emerald-100 dark:border-emerald-900/30' }}">
+                                    <span class="inline-flex items-center rounded-lg px-2 py-0.5 text-xs font-bold border {{ $ast->percentage < 40 ? 'bg-rose-500/10 text-rose-600 dark:text-rose-455 border-rose-500/20' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-455 border-emerald-500/20' }}">
                                         {{ $ast->obtained }} / {{ $ast->max_possible }}
                                     </span>
                                 </td>
-                                <td class="py-4 px-6 text-right space-x-2.5">
-                                    <a href="{{ route('teacher.assessments.edit', $ast->id) }}" class="inline-flex items-center rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-2.5 py-1.5 text-xs font-semibold transition-all">
+                                <td class="py-4 px-6 text-right space-x-2.5 whitespace-nowrap">
+                                    <a href="{{ route('teacher.assessments.edit', $ast->id) }}" class="inline-flex items-center rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-750 text-zinc-750 dark:text-zinc-300 px-2.5 py-1.5 text-xs font-semibold transition-all">
                                         Edit
                                     </a>
                                     <form method="POST" action="{{ route('teacher.assessments.destroy', $ast->id) }}" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this assessment record?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="inline-flex items-center rounded-lg bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/30 text-red-700 dark:text-red-400 px-2.5 py-1.5 text-xs font-semibold transition-all">
+                                        <button type="submit" class="inline-flex items-center rounded-lg bg-rose-50 hover:bg-rose-100/80 text-rose-700 border border-rose-200 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 dark:text-rose-455 dark:border-rose-500/25 px-2.5 py-1.5 text-xs font-semibold transition-all">
                                             Delete
                                         </button>
                                     </form>
@@ -184,7 +184,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-12 text-center text-slate-400 dark:text-slate-500 text-xs">
+                                <td colspan="7" class="py-12 text-center text-zinc-400 dark:text-zinc-500 text-xs">
                                     No assessment records found in the database.
                                 </td>
                             </tr>
